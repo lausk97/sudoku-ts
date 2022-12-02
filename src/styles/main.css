@@ -1,0 +1,162 @@
+:root {
+  --light: rgb(255, 255, 228);
+  --dark: rgb(15, 15, 15);
+  --board-size: 450px;
+}
+
+.sudoku-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark);
+  height: 100vh;
+  width: 100vw;
+  animation: fadeIn 0.5s;
+}
+
+.title-timer-container {
+  display: flex;
+  width: var(--board-size);
+  position: relative;
+}
+
+.title-text {
+  color: #fff;
+  margin: 0 auto;
+  font-size: 3rem;
+}
+
+.difficulty {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+
+.timer-resume-pause-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 5px;
+}
+
+.timer {
+  margin: 0;
+}
+
+.rx-pointer {
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.board {
+  width: var(--board-size);
+  height: var(--board-size);
+}
+
+.block-border-tile:nth-of-type(3n) {
+  border-bottom: 1px solid black;
+}
+
+.tile {
+  width: 50px;
+  height: 50px;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--dark);
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.tile:nth-of-type(3n) {
+  border-right: 1px solid black;
+}
+
+.init {
+  background-color: var(--light);
+  pointer-events: none;
+}
+
+.empty {
+  background-color: white;
+}
+
+.valid {
+  background-color: lightgreen;
+}
+
+.invalid {
+  background-color: #ff726f;
+}
+
+.empty:hover {
+  opacity: 0.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.btn {
+  border: 1px solid var(--light);
+  font-weight: bold;
+}
+
+.dropup {
+  position: relative;
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  min-width: 80px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  animation: fadeIn 0.375s;
+}
+
+.dropup-content button {
+  color: black;
+  padding: 12px 18px;
+  background-color: #f1f1f1;
+  border: 1px solid lightgrey;
+  width: 100%;
+  display: block;
+}
+
+.dropup-content button.cancel {
+  color: red;
+}
+
+.dropup-content button:hover {
+  background-color: #ddd;
+}
+
+.dropup:hover .dropup-content {
+  display: block;
+}
+
+.show-difficulty {
+  display: block;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
