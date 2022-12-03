@@ -21,7 +21,7 @@ const Action = ({
         <div className="actions">
             <div className="dropup">
                 <button
-                    className="btn create-btn"
+                    className="btn"
                     onClick={() =>
                         setShowDifficulty((showStatus) => !showStatus)
                     }
@@ -55,18 +55,18 @@ const Action = ({
             </div>
 
             <button
-                className="btn solve-btn"
+                className="btn"
                 onClick={() => onSolveSudoku()}
                 onMouseDown={(e) => preventBtnFocus(e)}
             >
                 Solve
             </button>
             <button
-                className="btn clear-btn"
+                className="btn"
                 onClick={(e) => onClearTile(e)}
                 onMouseDown={(e) => preventBtnFocus(e)}
             >
-                Clear
+                Erase
             </button>
         </div>
     );

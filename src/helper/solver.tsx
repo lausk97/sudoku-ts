@@ -115,7 +115,7 @@ export const returnSolvedBoard = (
 ): SudokuBoard | unsolvableBoard => {
     if (board) {
         let solvedBoard = copy2DArray(board);
-        if (solve(solvedBoard) && validateBoard(solvedBoard)) {
+        if (solvedBoard && solve(solvedBoard) && validateBoard(solvedBoard)) {
             return solvedBoard;
         }
     }
@@ -123,29 +123,27 @@ export const returnSolvedBoard = (
     return;
 };
 
-export const solve = (board: SudokuBoard | unsolvableBoard): boolean => {
-    if (board) {
-        for (let row = 0; row < BOARD_SIZE; row++) {
-            for (let col = 0; col < BOARD_SIZE; col++) {
-                if (board[row][col] === UNASSIGNED) {
-                    for (let guess = 1; guess < NUM_GUESSES + 1; guess++) {
-                        if (isValidPos(board, row, col, guess)) {
-                            // initialise guess in the (row, col) position
-                            board[row][col] = guess;
-                            if (solve(board)) {
-                                return true;
-                            }
-
-                            // cannot be solved, revert back the current guess
-                            board[row][col] = UNASSIGNED;
+export const solve = (board: SudokuBoard): boolean => {
+    for (let row = 0; row < BOARD_SIZE; row++) {
+        for (let col = 0; col < BOARD_SIZE; col++) {
+            if (board[row][col] === UNASSIGNED) {
+                for (let guess = 1; guess < NUM_GUESSES + 1; guess++) {
+                    if (isValidPos(board, row, col, guess)) {
+                        // initialise guess in the (row, col) position
+                        board[row][col] = guess;
+                        if (solve(board)) {
+                            return true;
                         }
-                    }
 
-                    return false;
+                        // cannot be solved, revert back the current guess
+                        board[row][col] = UNASSIGNED;
+                    }
                 }
+
+                return false;
             }
         }
     }
 
-    return !!board;
+    return validateBoard(board);
 };

@@ -19,7 +19,7 @@ export const copy2DArray = (
     return to;
 };
 
-const isEqual = (a: Array<number>, b: Array<number>): boolean =>
+export const isEqual = (a: Array<number>, b: Array<number>): boolean =>
     a.join() === b.join();
 
 export const isEqual2DArrays = (

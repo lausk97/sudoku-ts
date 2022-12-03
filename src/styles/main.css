@@ -1,30 +1,45 @@
 :root {
   --light: rgb(255, 255, 228);
   --dark: rgb(15, 15, 15);
-  --board-size: 450px;
+  --board-height: 90vh;
+  --xxsm-board-width: 270px;
+  --xsm-board-width: 306px;
+  --sm-board-width: 342px;
+  --md-board-width: 396px;
+  --lg-board-width: 441px;
+  --xxsm-tile-size: 30px;
+  --xsm-tile-size: 34px;
+  --sm-tile-size: 38px;
+  --md-tile-size: 44px;
+  --lg-tile-size: 49px;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 .sudoku-container {
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* flex-direction: column; */
+
   background-color: var(--dark);
-  height: 100vh;
-  width: 100vw;
-  animation: fadeIn 0.5s;
 }
 
 .title-timer-container {
   display: flex;
-  width: var(--board-size);
+  width: var(--xxsm-board-width);
   position: relative;
 }
 
 .title-text {
   color: #fff;
   margin: 0 auto;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .difficulty {
@@ -32,7 +47,7 @@
   right: 0;
   top: 0;
   margin-top: 0;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
 }
 
 .timer-resume-pause-container {
@@ -46,6 +61,7 @@
 }
 
 .timer {
+  font-size: 0.65rem;
   margin: 0;
 }
 
@@ -58,8 +74,9 @@
 }
 
 .board {
-  width: var(--board-size);
-  height: var(--board-size);
+  width: var(--xxsm-board-width);
+  height: var(--board-height);
+  animation: fadeIn 0.5s;
 }
 
 .block-border-tile:nth-of-type(3n) {
@@ -67,8 +84,8 @@
 }
 
 .tile {
-  width: 50px;
-  height: 50px;
+  width: var(--xxsm-tile-size);
+  height: var(--xxsm-tile-size);
   font-size: 1rem;
   text-align: center;
   font-weight: bold;
@@ -83,7 +100,6 @@
 
 .init {
   background-color: var(--light);
-  pointer-events: none;
 }
 
 .empty {
@@ -111,6 +127,7 @@
 .btn {
   border: 1px solid var(--light);
   font-weight: bold;
+  font-size: 0.75rem;
 }
 
 .dropup {
@@ -158,5 +175,109 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 360px) {
+  .difficulty {
+    font-size: 0.7rem;
+  }
+
+  .timer {
+    font-size: 0.7rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  .title-timer-container,
+  .board {
+    width: var(--xsm-board-width);
+  }
+
+  .tile {
+    width: var(--xsm-tile-size);
+    height: var(--xsm-tile-size);
+  }
+}
+
+@media screen and (min-width: 361px) and (max-width: 479px) {
+  .difficulty {
+    font-size: 0.75rem;
+  }
+
+  .timer {
+    font-size: 0.75rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+  }
+
+  .title-timer-container,
+  .board {
+    width: var(--sm-board-width);
+  }
+
+  .tile {
+    width: var(--sm-tile-size);
+    height: var(--sm-tile-size);
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 1024px) {
+  .title-text {
+    font-size: 3rem;
+  }
+
+  .difficulty {
+    font-size: 1rem;
+  }
+
+  .timer {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1.125rem;
+  }
+
+  .title-timer-container,
+  .board {
+    width: var(--md-board-width);
+  }
+
+  .tile {
+    width: var(--md-tile-size);
+    height: var(--md-tile-size);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .title-text {
+    font-size: 3rem;
+  }
+
+  .difficulty {
+    font-size: 1rem;
+  }
+
+  .timer {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 1.25rem;
+  }
+
+  .title-timer-container,
+  .board {
+    width: var(--lg-board-width);
+  }
+
+  .tile {
+    width: var(--lg-tile-size);
+    height: var(--lg-tile-size);
   }
 }

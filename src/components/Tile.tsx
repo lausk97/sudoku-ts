@@ -23,6 +23,7 @@ const Tile = ({
                 board.map((row, rowIndex) => (
                     <div
                         key={`board-${row}-${rowIndex}`}
+                        id={`board-${row}-${rowIndex}`}
                         className="block-border-tile"
                     >
                         {row.map((col, colIndex) => (
