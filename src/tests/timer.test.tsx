@@ -1,7 +1,7 @@
 import { screen, render, act, cleanup } from '@testing-library/react';
 import Sudoku from '../Sudoku';
 
-it('calls the use interval callback', async () => {
+test('if the sudoku timer runs', async () => {
     const initialTimer = '00:00';
     const twoSecondsTimer = '00:02';
 

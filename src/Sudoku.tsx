@@ -175,45 +175,43 @@ const Sudoku = () => {
 
     return (
         <div className="sudoku-container">
-            <div className="center-container">
-                <div className="title-timer-container">
-                    <h1 className="title-text">Sudoku</h1>
-                    <p className="difficulty">{`Difficulty: ${difficulty}`}</p>
+            <div className="title-timer-container">
+                <h1 className="title-text">Sudoku</h1>
+                <p className="difficulty">{`Difficulty: ${difficulty}`}</p>
 
-                    <div className="timer-resume-pause-container">
-                        <p className="timer">{formatTimer()}</p>
-                        {isRunning ? (
-                            <RxResume
-                                size={18}
-                                className={`rx-pointer ${
-                                    gameOver ? 'disabled' : ''
-                                }`}
-                                onClick={handleTimerClick}
-                            />
-                        ) : (
-                            <RxPause
-                                size={18}
-                                className={`rx-pointer ${
-                                    gameOver ? 'disabled' : ''
-                                }`}
-                                onClick={handleTimerClick}
-                            />
-                        )}
-                    </div>
+                <div className="timer-resume-pause-container">
+                    <p className="timer">{formatTimer()}</p>
+                    {isRunning ? (
+                        <RxResume
+                            size={18}
+                            className={`rx-pointer ${
+                                gameOver ? 'disabled' : ''
+                            }`}
+                            onClick={handleTimerClick}
+                        />
+                    ) : (
+                        <RxPause
+                            size={18}
+                            className={`rx-pointer ${
+                                gameOver ? 'disabled' : ''
+                            }`}
+                            onClick={handleTimerClick}
+                        />
+                    )}
                 </div>
-
-                <Board
-                    initialBoard={initialBoard}
-                    board={board}
-                    solvedBoard={solvedBoard}
-                    onCreateNewSudoku={createNewSudoku}
-                    onSolveSudoku={solveSudoku}
-                    onClearTile={clearTile}
-                    onInputNumber={inputNumber}
-                    onHandleTileFocus={handleTileFocus}
-                    onHandleFocusOut={handleFocusOut}
-                />
             </div>
+
+            <Board
+                initialBoard={initialBoard}
+                board={board}
+                solvedBoard={solvedBoard}
+                onCreateNewSudoku={createNewSudoku}
+                onSolveSudoku={solveSudoku}
+                onClearTile={clearTile}
+                onInputNumber={inputNumber}
+                onHandleTileFocus={handleTileFocus}
+                onHandleFocusOut={handleFocusOut}
+            />
         </div>
     );
 };
