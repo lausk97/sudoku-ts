@@ -9,9 +9,9 @@ Sudoku grid consists of 9x9 spaces.
 There are 9 3x3 block within the grid.
 You can only input numbers between 1 to 9.
 
-## How to play?
+## Game Rules
 
-The row and column has to satisfy the requirement below:
+All the grids have to satisfy three requirements below:
 
 1. Each vertical row can only contain one of 1 to 9 (no duplicate allowed)
 2. Each horizontal column can only contain one of 1 to 9 (no duplicate allowed)
