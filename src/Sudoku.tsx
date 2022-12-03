@@ -115,10 +115,11 @@ const Sudoku = () => {
 
     const clearTile: Function = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         if (
             !gameOver &&
-            focusRow &&
-            focusCol &&
+            focusRow !== undefined &&
+            focusCol !== undefined &&
             withinBoard(focusRow, focusCol) &&
             board
         ) {
@@ -152,17 +153,29 @@ const Sudoku = () => {
     const inputKeyboardNumber: Function = (
         e: React.KeyboardEvent<HTMLElement>
     ) => {
-        if (
-            !focusRow ||
-            !focusCol ||
-            (focusRow &&
-                focusCol &&
-                initialBoard[focusRow][focusCol] !== UNASSIGNED)
-        )
+        if (!(parseInt(e.key) >= 1 && parseInt(e.key) <= 9)) {
+            e.preventDefault();
             return;
+        }
+
+        if (
+            focusRow === undefined ||
+            focusCol === undefined ||
+            (focusRow !== undefined &&
+                focusCol !== undefined &&
+                initialBoard[focusRow][focusCol] !== UNASSIGNED)
+        ) {
+            return;
+        }
 
         const isNumber = /^[0-9]$/i.test(e.key);
         if (isNumber && board) {
+            // to prevent extension of duplicate numbers
+            if (board[focusRow][focusCol] === parseInt(e.key)) {
+                e.preventDefault();
+                return;
+            }
+
             const currentBoard = copy2DArray(board);
             setCurrentBoard(currentBoard, focusRow, focusCol, parseInt(e.key));
 
@@ -176,7 +189,7 @@ const Sudoku = () => {
     ) => {
         e.preventDefault();
 
-        if (!focusRow || !focusCol) return;
+        if (focusRow === undefined || focusCol === undefined) return;
 
         if (withinBoard(focusRow, focusCol)) {
             if (board) {
