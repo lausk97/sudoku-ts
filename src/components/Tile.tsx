@@ -5,14 +5,14 @@ const Tile = ({
     initialBoard,
     board,
     solvedBoard,
-    onInputNumber,
+    onInputKeyboardNumber,
     onHandleTileFocus,
     onHandleFocusOut
 }: {
     initialBoard: SudokuBoard;
     board: SudokuBoard | unsolvableBoard;
     solvedBoard: SudokuBoard | unsolvableBoard;
-    onInputNumber: Function;
+    onInputKeyboardNumber: Function;
     onHandleTileFocus: Function;
     onHandleFocusOut: Function;
 }) => {
@@ -49,9 +49,7 @@ const Tile = ({
                                         ? ''
                                         : board[rowIndex][colIndex]
                                 }
-                                onKeyDown={(e) =>
-                                    onInputNumber(e, rowIndex, colIndex)
-                                }
+                                onKeyDown={(e) => onInputKeyboardNumber(e)}
                                 onFocus={() =>
                                     onHandleTileFocus(rowIndex, colIndex)
                                 }

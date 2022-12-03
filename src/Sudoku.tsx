@@ -128,36 +128,63 @@ const Sudoku = () => {
         }
     };
 
-    const inputNumber: Function = (
-        e: React.KeyboardEvent<HTMLElement>,
-        rowIndex: number,
-        colIndex: number
+    const keepInputFocus = (rowIndex: number, colIndex: number) => {
+        // continue focus of the current input
+        setTimeout(() => {
+            // check if the board is solved after inputting the new number
+            const isGameOver = !!(
+                currBoardRef.current &&
+                solvedBoard &&
+                isEqual2DArrays(currBoardRef.current, solvedBoard)
+            );
+            if (isGameOver) {
+                setIsRunning(!isGameOver);
+                setGameOver(isGameOver);
+            } else {
+                const currentInput = document.getElementById(
+                    `input-${rowIndex}-${colIndex}`
+                );
+                currentInput?.focus();
+            }
+        }, 0);
+    };
+
+    const inputKeyboardNumber: Function = (
+        e: React.KeyboardEvent<HTMLElement>
     ) => {
-        if (initialBoard[rowIndex][colIndex] !== UNASSIGNED) return;
+        if (
+            !focusRow ||
+            !focusCol ||
+            (focusRow &&
+                focusCol &&
+                initialBoard[focusRow][focusCol] !== UNASSIGNED)
+        )
+            return;
 
         const isNumber = /^[0-9]$/i.test(e.key);
         if (isNumber && board) {
             const currentBoard = copy2DArray(board);
-            setCurrentBoard(currentBoard, rowIndex, colIndex, parseInt(e.key));
+            setCurrentBoard(currentBoard, focusRow, focusCol, parseInt(e.key));
 
-            // continue focus of the current input
-            setTimeout(() => {
-                // check if the board is solved after inputting the new number
-                const isGameOver = !!(
-                    currBoardRef.current &&
-                    solvedBoard &&
-                    isEqual2DArrays(currBoardRef.current, solvedBoard)
-                );
-                if (isGameOver) {
-                    setIsRunning(!isGameOver);
-                    setGameOver(isGameOver);
-                } else {
-                    const currentInput = document.getElementById(
-                        `input-${rowIndex}-${colIndex}`
-                    );
-                    currentInput?.focus();
-                }
-            }, 0);
+            keepInputFocus(focusRow, focusCol);
+        }
+    };
+
+    const inputNumpadNumber: Function = (
+        e: React.FormEvent<HTMLFormElement>,
+        num: number
+    ) => {
+        e.preventDefault();
+
+        if (!focusRow || !focusCol) return;
+
+        if (withinBoard(focusRow, focusCol)) {
+            if (board) {
+                const currentBoard = copy2DArray(board);
+                setCurrentBoard(currentBoard, focusRow, focusCol, num);
+
+                keepInputFocus(focusRow, focusCol);
+            }
         }
     };
 
@@ -208,7 +235,8 @@ const Sudoku = () => {
                 onCreateNewSudoku={createNewSudoku}
                 onSolveSudoku={solveSudoku}
                 onClearTile={clearTile}
-                onInputNumber={inputNumber}
+                onInputKeyboardNumber={inputKeyboardNumber}
+                onInputNumpadNumber={inputNumpadNumber}
                 onHandleTileFocus={handleTileFocus}
                 onHandleFocusOut={handleFocusOut}
             />

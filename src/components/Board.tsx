@@ -1,13 +1,14 @@
-import React from 'react';
 import Tile from './Tile';
 import Action from './Action';
 import type { SudokuBoard, unsolvableBoard } from '../helper/types';
+import NumberPad from './NumberPad';
 
 const Board = ({
     initialBoard,
     board,
     solvedBoard,
-    onInputNumber,
+    onInputKeyboardNumber,
+    onInputNumpadNumber,
     onCreateNewSudoku,
     onSolveSudoku,
     onClearTile,
@@ -17,7 +18,8 @@ const Board = ({
     initialBoard: SudokuBoard;
     board: SudokuBoard | unsolvableBoard;
     solvedBoard: SudokuBoard | unsolvableBoard;
-    onInputNumber: Function;
+    onInputKeyboardNumber: Function;
+    onInputNumpadNumber: Function;
     onCreateNewSudoku: Function;
     onSolveSudoku: Function;
     onClearTile: Function;
@@ -30,7 +32,7 @@ const Board = ({
                 initialBoard={initialBoard}
                 board={board}
                 solvedBoard={solvedBoard}
-                onInputNumber={onInputNumber}
+                onInputKeyboardNumber={onInputKeyboardNumber}
                 onHandleTileFocus={onHandleTileFocus}
                 onHandleFocusOut={onHandleFocusOut}
             />
@@ -39,6 +41,7 @@ const Board = ({
                 onSolveSudoku={onSolveSudoku}
                 onClearTile={onClearTile}
             />
+            <NumberPad onInputNumpadNumber={onInputNumpadNumber} />
         </div>
     );
 };

@@ -15,7 +15,7 @@ it('should render all tiles according to the generated random sudoku', () => {
             initialBoard={initialBoard}
             board={board}
             solvedBoard={solvedBoard}
-            onInputNumber={noop}
+            onInputKeyboardNumber={noop}
             onHandleTileFocus={noop}
             onHandleFocusOut={noop}
         />
