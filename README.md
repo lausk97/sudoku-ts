@@ -17,6 +17,4 @@ The row and column has to satisfy the requirement below:
 2. Each horizontal column can only contain one of 1 to 9 (no duplicate allowed)
 3. Each 3x3 block can only contain one of 1 to 9 (no duplicate allowed)
 
-<p align="center"> 
-    <img src="src/assets/rules-sudoku.png" alt="Rules - Sudoku">
-</p>
+<img src="src/assets/rules-sudoku.png" alt="Rules - Sudoku">
