@@ -28,6 +28,7 @@ const Tile = ({
                     >
                         {row.map((col, colIndex) => (
                             <input
+                                inputMode="none"
                                 className={`tile ${
                                     initialBoard[rowIndex][colIndex] !==
                                     UNASSIGNED
