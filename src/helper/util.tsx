@@ -51,3 +51,6 @@ export const withinBoard = (rowIndex: number, colIndex: number) => {
 
 export const preventBtnFocus: Function = (e: FormEvent<HTMLFormElement>) =>
     e.preventDefault();
+
+export const cancelablePreventDef: Function = (e: FormEvent<HTMLFormElement>) =>
+    e.cancelable && e.preventDefault();

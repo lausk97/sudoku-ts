@@ -123,10 +123,6 @@ body,
   background-color: #ff726f;
 }
 
-.empty:hover {
-  opacity: 0.5;
-}
-
 .actions {
   display: flex;
   justify-content: space-between;
@@ -166,14 +162,6 @@ body,
   color: red;
 }
 
-.dropup-content button:hover {
-  background-color: #ddd;
-}
-
-.dropup:hover .dropup-content {
-  display: block;
-}
-
 .show-difficulty {
   display: block;
 }
@@ -192,10 +180,6 @@ body,
   border: 1px solid white;
   color: var(--skyblue);
   padding: 0;
-}
-
-.numpad-container button:hover {
-  opacity: 0.8;
 }
 
 @keyframes fadeIn {
@@ -332,5 +316,39 @@ body,
   .numpad-container button {
     width: var(--lg-numpad-size);
     height: var(--lg-numpad-size);
+  }
+}
+
+/* use hover effect for desktop */
+@media (hover: hover) {
+  .dropup:hover .dropup-content {
+    display: block;
+  }
+
+  .dropup-content button:hover {
+    background-color: #ddd;
+  }
+
+  .empty:hover {
+    opacity: 0.5;
+  }
+
+  .numpad-container button:hover {
+    opacity: 0.8;
+  }
+}
+
+/* use focus effect for touch devices */
+@media (hover: none) {
+  .dropup-content button:focus {
+    background-color: #ddd;
+  }
+
+  .empty:focus {
+    opacity: 0.5;
+  }
+
+  .numpad-container button:focus {
+    opacity: 0.8;
   }
 }
