@@ -58,6 +58,7 @@ const Action = ({
                 className="btn"
                 onClick={() => onSolveSudoku()}
                 onMouseDown={(e) => preventBtnFocus(e)}
+                onTouchStart={(e) => preventBtnFocus(e)}
             >
                 Solve
             </button>
@@ -65,6 +66,7 @@ const Action = ({
                 className="btn"
                 onClick={(e) => onClearTile(e)}
                 onMouseDown={(e) => preventBtnFocus(e)}
+                onTouchStart={(e) => preventBtnFocus(e)}
             >
                 Erase
             </button>
