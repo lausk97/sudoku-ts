@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, KeyboardEvent, FormEvent } from 'react';
 import { generateRandomSudoku, SUDOKUS } from './helper/map';
 import { returnSolvedBoard } from './helper/solver';
 import { copy2DArray, isEqual2DArrays, withinBoard } from './helper/util';
@@ -113,7 +113,7 @@ const Sudoku = () => {
         }, 0);
     };
 
-    const clearTile: Function = (e: React.FormEvent<HTMLFormElement>) => {
+    const clearTile: Function = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (
@@ -150,9 +150,7 @@ const Sudoku = () => {
         }, 0);
     };
 
-    const inputKeyboardNumber: Function = (
-        e: React.KeyboardEvent<HTMLElement>
-    ) => {
+    const inputKeyboardNumber: Function = (e: KeyboardEvent<HTMLElement>) => {
         if (!(parseInt(e.key) >= 1 && parseInt(e.key) <= 9)) {
             e.preventDefault();
             return;
@@ -184,7 +182,7 @@ const Sudoku = () => {
     };
 
     const inputNumpadNumber: Function = (
-        e: React.FormEvent<HTMLFormElement>,
+        e: FormEvent<HTMLFormElement>,
         num: number
     ) => {
         e.preventDefault();
@@ -201,13 +199,7 @@ const Sudoku = () => {
         }
     };
 
-    const handleTileFocus: Function = (
-        e: React.FormEvent<HTMLFormElement>,
-        rowIndex: number,
-        colIndex: number
-    ) => {
-        e.stopPropagation();
-
+    const handleTileFocus: Function = (rowIndex: number, colIndex: number) => {
         if (withinBoard(rowIndex, colIndex)) {
             setFocusRow(rowIndex);
             setFocusCol(colIndex);
@@ -223,7 +215,7 @@ const Sudoku = () => {
         <>
             <div
                 className={`sudoku-container ${
-                    !isRunning ? 'stopped-timer-bg' : ''
+                    !isRunning && !gameOver ? 'stopped-timer-bg' : ''
                 }`}
             >
                 <div className="title-timer-container">
@@ -256,6 +248,9 @@ const Sudoku = () => {
                     initialBoard={initialBoard}
                     board={board}
                     solvedBoard={solvedBoard}
+                    focusRow={focusRow}
+                    focusCol={focusCol}
+                    isGameOver={gameOver}
                     onCreateNewSudoku={createNewSudoku}
                     onSolveSudoku={solveSudoku}
                     onClearTile={clearTile}

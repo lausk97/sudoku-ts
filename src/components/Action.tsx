@@ -3,10 +3,12 @@ import { DifficultyType } from '../helper/types';
 import { preventBtnFocus } from '../helper/util';
 
 const Action = ({
+    isGameOver,
     onCreateNewSudoku,
     onSolveSudoku,
     onClearTile
 }: {
+    isGameOver: boolean;
     onCreateNewSudoku: Function;
     onSolveSudoku: Function;
     onClearTile: Function;
@@ -58,7 +60,7 @@ const Action = ({
                 className="btn"
                 onClick={() => onSolveSudoku()}
                 onMouseDown={(e) => preventBtnFocus(e)}
-                onTouchStart={(e) => preventBtnFocus(e)}
+                disabled={isGameOver}
             >
                 Solve
             </button>
@@ -66,7 +68,7 @@ const Action = ({
                 className="btn"
                 onClick={(e) => onClearTile(e)}
                 onMouseDown={(e) => preventBtnFocus(e)}
-                onTouchStart={(e) => preventBtnFocus(e)}
+                disabled={isGameOver}
             >
                 Erase
             </button>

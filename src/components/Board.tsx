@@ -7,6 +7,9 @@ const Board = ({
     initialBoard,
     board,
     solvedBoard,
+    focusRow,
+    focusCol,
+    isGameOver,
     onInputKeyboardNumber,
     onInputNumpadNumber,
     onCreateNewSudoku,
@@ -18,6 +21,9 @@ const Board = ({
     initialBoard: SudokuBoard;
     board: SudokuBoard | unsolvableBoard;
     solvedBoard: SudokuBoard | unsolvableBoard;
+    focusRow: number | undefined;
+    focusCol: number | undefined;
+    isGameOver: boolean;
     onInputKeyboardNumber: Function;
     onInputNumpadNumber: Function;
     onCreateNewSudoku: Function;
@@ -32,6 +38,8 @@ const Board = ({
                 initialBoard={initialBoard}
                 board={board}
                 solvedBoard={solvedBoard}
+                focusRow={focusRow}
+                focusCol={focusCol}
                 onInputKeyboardNumber={onInputKeyboardNumber}
                 onHandleTileFocus={onHandleTileFocus}
                 onHandleFocusOut={onHandleFocusOut}
@@ -40,8 +48,12 @@ const Board = ({
                 onCreateNewSudoku={onCreateNewSudoku}
                 onSolveSudoku={onSolveSudoku}
                 onClearTile={onClearTile}
+                isGameOver={isGameOver}
             />
-            <NumberPad onInputNumpadNumber={onInputNumpadNumber} />
+            <NumberPad
+                isGameOver={isGameOver}
+                onInputNumpadNumber={onInputNumpadNumber}
+            />
         </div>
     );
 };

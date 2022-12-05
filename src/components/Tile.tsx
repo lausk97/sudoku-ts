@@ -5,6 +5,8 @@ const Tile = ({
     initialBoard,
     board,
     solvedBoard,
+    focusRow,
+    focusCol,
     onInputKeyboardNumber,
     onHandleTileFocus,
     onHandleFocusOut
@@ -12,6 +14,8 @@ const Tile = ({
     initialBoard: SudokuBoard;
     board: SudokuBoard | unsolvableBoard;
     solvedBoard: SudokuBoard | unsolvableBoard;
+    focusRow: number | undefined;
+    focusCol: number | undefined;
     onInputKeyboardNumber: Function;
     onHandleTileFocus: Function;
     onHandleFocusOut: Function;
@@ -39,6 +43,18 @@ const Tile = ({
                                           solvedBoard[rowIndex][colIndex]
                                         ? 'invalid'
                                         : 'valid'
+                                } ${
+                                    focusRow !== undefined &&
+                                    focusCol !== undefined &&
+                                    !(
+                                        document.getElementById(
+                                            `input-${rowIndex}-${colIndex}`
+                                        ) as HTMLInputElement
+                                    )?.value.localeCompare(
+                                        board[focusRow][focusCol].toString()
+                                    )
+                                        ? 'focus'
+                                        : ''
                                 }`}
                                 readOnly={
                                     initialBoard[rowIndex][colIndex] !==
@@ -51,8 +67,8 @@ const Tile = ({
                                         : board[rowIndex][colIndex]
                                 }
                                 onKeyDown={(e) => onInputKeyboardNumber(e)}
-                                onFocus={(e) =>
-                                    onHandleTileFocus(e, rowIndex, colIndex)
+                                onFocus={() =>
+                                    onHandleTileFocus(rowIndex, colIndex)
                                 }
                                 onBlur={() => onHandleFocusOut()}
                                 pattern="^$|[1-9]{1}"
