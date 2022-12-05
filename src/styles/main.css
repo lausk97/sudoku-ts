@@ -2,6 +2,7 @@
   --light: rgb(255, 255, 228);
   --dark: rgb(15, 15, 15);
   --navyblue: rgb(0, 0, 128);
+  --cornflowerblue: rgb(100, 149, 237);
   --skyblue: rgb(135, 206, 235);
   --xxsm-board-width: 270px;
   --xsm-board-width: 306px;
@@ -229,6 +230,11 @@ body,
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+}
+
+.actions .dropup .btn,
+.actions .btn {
+  color: var(--cornflowerblue);
 }
 
 .btn {
