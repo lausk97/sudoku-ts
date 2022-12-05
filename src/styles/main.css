@@ -3,7 +3,6 @@
   --dark: rgb(15, 15, 15);
   --navyblue: rgb(0, 0, 128);
   --skyblue: rgb(135, 206, 235);
-  --board-height: 100%;
   --xxsm-board-width: 270px;
   --xsm-board-width: 306px;
   --sm-board-width: 342px;
@@ -35,7 +34,7 @@ body,
 
 .sudoku-container {
   width: 100%;
-  height: 100%;
+  height: stretch;
   display: flex;
   place-items: center;
   flex-direction: column;
@@ -119,7 +118,7 @@ body,
 .title-timer-container {
   display: flex;
   width: var(--xxsm-board-width);
-  height: 25%;
+  height: 17vh;
   position: relative;
 }
 
@@ -163,7 +162,6 @@ body,
 
 .board {
   width: var(--xxsm-board-width);
-  height: var(--board-height);
   animation: fadeIn 0.5s;
 }
 

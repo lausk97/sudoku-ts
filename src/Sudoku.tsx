@@ -187,7 +187,14 @@ const Sudoku = () => {
     ) => {
         e.preventDefault();
 
-        if (focusRow === undefined || focusCol === undefined) return;
+        if (
+            focusRow === undefined ||
+            focusCol === undefined ||
+            (focusRow !== undefined &&
+                focusCol !== undefined &&
+                initialBoard[focusRow][focusCol] !== UNASSIGNED)
+        )
+            return;
 
         if (withinBoard(focusRow, focusCol)) {
             if (board) {
