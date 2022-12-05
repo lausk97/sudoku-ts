@@ -40,7 +40,6 @@ body,
   place-items: center;
   flex-direction: column;
   background-color: var(--dark);
-  overflow: hidden;
 }
 
 .stopped-timer-bg {
