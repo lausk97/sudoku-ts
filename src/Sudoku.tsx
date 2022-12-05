@@ -214,46 +214,75 @@ const Sudoku = () => {
     };
 
     return (
-        <div className="sudoku-container">
-            <div className="title-timer-container">
-                <h1 className="title-text">Sudoku</h1>
-                <p className="difficulty">{`Difficulty: ${difficulty}`}</p>
+        <>
+            <div
+                className={`sudoku-container ${
+                    !isRunning ? 'stopped-timer-bg' : ''
+                }`}
+            >
+                <div className="title-timer-container">
+                    <h1 className="title-text">Sudoku</h1>
+                    <p className="difficulty">{`Difficulty: ${difficulty}`}</p>
 
-                <div className="timer-resume-pause-container">
-                    <p className="timer">{formatTimer()}</p>
-                    {isRunning ? (
+                    <div className="timer-resume-pause-container">
+                        <p className="timer">{formatTimer()}</p>
+                        {isRunning ? (
+                            <RxResume
+                                size={18}
+                                className={`rx-pointer ${
+                                    gameOver ? 'disabled' : ''
+                                }`}
+                                onClick={handleTimerClick}
+                            />
+                        ) : (
+                            <RxPause
+                                size={18}
+                                className={`rx-pointer ${
+                                    gameOver ? 'disabled' : ''
+                                }`}
+                                onClick={handleTimerClick}
+                            />
+                        )}
+                    </div>
+                </div>
+
+                <Board
+                    initialBoard={initialBoard}
+                    board={board}
+                    solvedBoard={solvedBoard}
+                    onCreateNewSudoku={createNewSudoku}
+                    onSolveSudoku={solveSudoku}
+                    onClearTile={clearTile}
+                    onInputKeyboardNumber={inputKeyboardNumber}
+                    onInputNumpadNumber={inputNumpadNumber}
+                    onHandleTileFocus={handleTileFocus}
+                    onHandleFocusOut={handleFocusOut}
+                />
+            </div>
+
+            {!isRunning ? (
+                <div className="pause-container">
+                    <h2 className="pause-title">Pause</h2>
+                    <div className="pause-timer-container">
+                        <p className="pause-time-text">Time</p>
+                        <p className="pause-timer">{formatTimer()}</p>
+                    </div>
+                    <div className="pause-difficulty-container">
+                        <p className="pause-difficulty-text">Difficulty</p>
+                        <p className="pause-difficulty">{difficulty}</p>
+                    </div>
+                    <button className="resume-btn" onClick={handleTimerClick}>
                         <RxResume
                             size={18}
                             className={`rx-pointer ${
                                 gameOver ? 'disabled' : ''
                             }`}
-                            onClick={handleTimerClick}
                         />
-                    ) : (
-                        <RxPause
-                            size={18}
-                            className={`rx-pointer ${
-                                gameOver ? 'disabled' : ''
-                            }`}
-                            onClick={handleTimerClick}
-                        />
-                    )}
+                        Resume
+                    </button>
                 </div>
-            </div>
-
-            <Board
-                initialBoard={initialBoard}
-                board={board}
-                solvedBoard={solvedBoard}
-                onCreateNewSudoku={createNewSudoku}
-                onSolveSudoku={solveSudoku}
-                onClearTile={clearTile}
-                onInputKeyboardNumber={inputKeyboardNumber}
-                onInputNumpadNumber={inputNumpadNumber}
-                onHandleTileFocus={handleTileFocus}
-                onHandleFocusOut={handleFocusOut}
-            />
-        </div>
+            ) : null}
+        </>
     );
 };
 

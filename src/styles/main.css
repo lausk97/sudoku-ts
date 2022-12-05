@@ -9,6 +9,11 @@
   --sm-board-width: 342px;
   --md-board-width: 396px;
   --lg-board-width: 441px;
+  --xxsm-pause-width: calc(var(--xxsm-board-width) * 0.8);
+  --xsm-pause-width: calc(var(--xsm-board-width) * 0.8);
+  --sm-pause-width: calc(var(--sm-board-width) * 0.8);
+  --md-pause-width: calc(var(--md-board-width) * 0.8);
+  --lg-pause-width: calc(var(--lg-board-width) * 0.8);
   --xxsm-tile-size: 30px;
   --xsm-tile-size: 34px;
   --sm-tile-size: 38px;
@@ -31,23 +36,95 @@ body,
 .sudoku-container {
   width: 100%;
   height: 100%;
-  display: grid;
-  place-items: normal center;
+  display: flex;
+  place-items: center;
   flex-direction: column;
-
   background-color: var(--dark);
+}
+
+.stopped-timer-bg {
+  filter: blur(0.125rem);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.pause-container {
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: var(--xxsm-pause-width);
+  height: 35%;
+  background-color: var(--light);
+  border-radius: 7px;
+}
+
+.pause-title {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  translate: -50% -10%;
+  color: black;
+  font-weight: bold;
+}
+
+.pause-timer-container {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  translate: -20% -40%;
+}
+
+.pause-time-text {
+  color: gray;
+}
+
+.pause-timer {
+  color: black;
+  font-weight: 500;
+  text-align: center;
+}
+
+.pause-difficulty-container {
+  position: absolute;
+  top: 40%;
+  left: 80%;
+  translate: -80% -40%;
+}
+
+.pause-difficulty-text {
+  color: gray;
+}
+
+.pause-difficulty {
+  color: black;
+  font-weight: 500;
+  text-align: center;
+}
+
+.resume-btn {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  translate: -50% 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
 }
 
 .title-timer-container {
   display: flex;
   width: var(--xxsm-board-width);
+  height: 25%;
   position: relative;
 }
 
 .title-text {
   color: #fff;
-  margin: auto;
   font-size: 2rem;
+  margin: auto;
 }
 
 .difficulty {
@@ -100,6 +177,7 @@ body,
   color: var(--navyblue);
   border: 1px solid lightgray;
   cursor: pointer;
+  touch-action: none;
 }
 
 .tile:nth-of-type(3n) {
@@ -111,16 +189,32 @@ body,
   background-color: var(--light);
 }
 
+.init:focus {
+  opacity: 0.5;
+}
+
 .empty {
   background-color: white;
+}
+
+.empty:focus {
+  opacity: 0.5;
 }
 
 .valid {
   background-color: lightgreen;
 }
 
+.valid:focus {
+  background-color: green;
+}
+
 .invalid {
   background-color: #ff726f;
+}
+
+.invalid:focus {
+  background-color: red;
 }
 
 .actions {
@@ -158,6 +252,10 @@ body,
   display: block;
 }
 
+.dropup-content button:focus {
+  background-color: #ddd;
+}
+
 .dropup-content button.cancel {
   color: red;
 }
@@ -170,6 +268,10 @@ body,
   width: var(--xxsm-board-width);
   display: flex;
   justify-content: space-between;
+}
+
+.numpad-container button:focus {
+  opacity: 0.8;
 }
 
 .numpad-container button {
@@ -210,6 +312,10 @@ body,
     width: var(--xsm-board-width);
   }
 
+  .pause-container {
+    width: var(--xsm-pause-width);
+  }
+
   .tile {
     width: var(--xsm-tile-size);
     height: var(--xsm-tile-size);
@@ -238,6 +344,10 @@ body,
   .board,
   .numpad-container {
     width: var(--sm-board-width);
+  }
+
+  .pause-container {
+    width: var(--sm-pause-width);
   }
 
   .tile {
@@ -274,6 +384,10 @@ body,
     width: var(--md-board-width);
   }
 
+  .pause-container {
+    width: var(--md-pause-width);
+  }
+
   .tile {
     width: var(--md-tile-size);
     height: var(--md-tile-size);
@@ -308,6 +422,10 @@ body,
     width: var(--lg-board-width);
   }
 
+  .pause-container {
+    width: var(--lg-pause-width);
+  }
+
   .tile {
     width: var(--lg-tile-size);
     height: var(--lg-tile-size);
@@ -334,21 +452,6 @@ body,
   }
 
   .numpad-container button:hover {
-    opacity: 0.8;
-  }
-}
-
-/* use focus effect for touch devices */
-@media (hover: none) {
-  .dropup-content button:focus {
-    background-color: #ddd;
-  }
-
-  .empty:focus {
-    opacity: 0.5;
-  }
-
-  .numpad-container button:focus {
     opacity: 0.8;
   }
 }
