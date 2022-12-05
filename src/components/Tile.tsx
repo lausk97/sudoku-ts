@@ -66,6 +66,7 @@ const Tile = ({
                                         ? ''
                                         : board[rowIndex][colIndex]
                                 }
+                                onClick={(e) => e.preventDefault()}
                                 onKeyDown={(e) => onInputKeyboardNumber(e)}
                                 onFocus={() =>
                                     onHandleTileFocus(rowIndex, colIndex)

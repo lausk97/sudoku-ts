@@ -107,9 +107,13 @@ const Sudoku = () => {
                 isEqual2DArrays(currBoardRef.current, solvedBoard)
             );
 
-            // stop timer as the game ends
-            setIsRunning(!isGameOver);
-            setGameOver(isGameOver);
+            if (isGameOver) {
+                // stop timer as the game ends
+                setIsRunning(!isGameOver);
+                setGameOver(isGameOver);
+                setFocusRow(undefined);
+                setFocusCol(undefined);
+            }
         }, 0);
     };
 
