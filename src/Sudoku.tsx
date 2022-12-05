@@ -201,7 +201,13 @@ const Sudoku = () => {
         }
     };
 
-    const handleTileFocus: Function = (rowIndex: number, colIndex: number) => {
+    const handleTileFocus: Function = (
+        e: React.FormEvent<HTMLFormElement>,
+        rowIndex: number,
+        colIndex: number
+    ) => {
+        e.preventDefault();
+
         if (withinBoard(rowIndex, colIndex)) {
             setFocusRow(rowIndex);
             setFocusCol(colIndex);
@@ -260,7 +266,7 @@ const Sudoku = () => {
                 />
             </div>
 
-            {!isRunning ? (
+            {!isRunning && !gameOver ? (
                 <div className="pause-container">
                     <h2 className="pause-title">Pause</h2>
                     <div className="pause-timer-container">
