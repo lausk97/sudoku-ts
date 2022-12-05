@@ -206,7 +206,7 @@ const Sudoku = () => {
         rowIndex: number,
         colIndex: number
     ) => {
-        e.preventDefault();
+        e.stopPropagation();
 
         if (withinBoard(rowIndex, colIndex)) {
             setFocusRow(rowIndex);
