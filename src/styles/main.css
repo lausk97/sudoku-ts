@@ -40,11 +40,12 @@ body,
   place-items: center;
   flex-direction: column;
   background-color: var(--dark);
+  overflow: hidden;
 }
 
 .stopped-timer-bg {
-  filter: blur(0.125rem);
-  opacity: 0.6;
+  filter: blur(0.25rem);
+  opacity: 0.7;
   pointer-events: none;
 }
 
@@ -55,7 +56,7 @@ body,
   left: 50%;
   translate: -50% -50%;
   width: var(--xxsm-pause-width);
-  height: 35%;
+  height: 45%;
   background-color: var(--light);
   border-radius: 7px;
 }
