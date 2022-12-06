@@ -67,8 +67,8 @@ const Tile = ({
                                         : board[rowIndex][colIndex]
                                 }
                                 onKeyDown={(e) => onInputKeyboardNumber(e)}
-                                onFocus={(e) =>
-                                    onHandleTileFocus(e, rowIndex, colIndex)
+                                onFocus={() =>
+                                    onHandleTileFocus(rowIndex, colIndex)
                                 }
                                 onBlur={() => onHandleFocusOut()}
                                 pattern="^$|[1-9]{1}"

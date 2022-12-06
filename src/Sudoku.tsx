@@ -1,11 +1,5 @@
-import {
-    useState,
-    useEffect,
-    useRef,
-    KeyboardEvent,
-    FormEvent,
-    FocusEvent
-} from 'react';
+import { useState, useEffect, useRef, KeyboardEvent, FormEvent } from 'react';
+import { RemoveScroll } from 'react-remove-scroll';
 import { generateRandomSudoku, SUDOKUS } from './helper/map';
 import { returnSolvedBoard } from './helper/solver';
 import { copy2DArray, isEqual2DArrays, withinBoard } from './helper/util';
@@ -217,18 +211,8 @@ const Sudoku = () => {
         }
     };
 
-    const handleTileFocus: Function = (
-        e: FocusEvent<HTMLElement>,
-        rowIndex: number,
-        colIndex: number
-    ) => {
-        e.preventDefault();
-
+    const handleTileFocus: Function = (rowIndex: number, colIndex: number) => {
         if (withinBoard(rowIndex, colIndex)) {
-            document
-                .getElementById(`input-${rowIndex}-${colIndex}`)
-                ?.focus({ preventScroll: true });
-
             setFocusRow(rowIndex);
             setFocusCol(colIndex);
         }
@@ -240,7 +224,7 @@ const Sudoku = () => {
     };
 
     return (
-        <>
+        <RemoveScroll>
             <div
                 className={`sudoku-container ${
                     !isRunning && !gameOver ? 'stopped-timer-bg' : ''
@@ -311,7 +295,7 @@ const Sudoku = () => {
                     </button>
                 </div>
             ) : null}
-        </>
+        </RemoveScroll>
     );
 };
 
