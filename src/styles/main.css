@@ -35,7 +35,6 @@ body,
 
 .sudoku-container {
   width: 100%;
-  height: stretch;
   display: flex;
   place-items: center;
   flex-direction: column;
@@ -452,14 +451,6 @@ body,
   .numpad-container button {
     width: var(--lg-numpad-size);
     height: var(--lg-numpad-size);
-  }
-}
-
-@media (orientation: portrait) {
-  body,
-  html,
-  #root {
-    overflow: hidden;
   }
 }
 
