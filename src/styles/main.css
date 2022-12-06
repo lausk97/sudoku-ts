@@ -237,6 +237,13 @@ body,
   color: var(--cornflowerblue);
 }
 
+.actions .dropup .btn:disabled,
+.actions .btn:disabled {
+  color: rgba(255, 255, 255, 0.3);
+  border-color: #ffffff;
+  pointer-events: none;
+}
+
 .btn {
   border: 1px solid var(--light);
   font-weight: bold;
@@ -301,6 +308,7 @@ body,
 
 .numpad-container button:disabled {
   color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
 }
 
 @media screen and (min-width: 320px) and (max-width: 360px) {
@@ -464,6 +472,7 @@ body,
 
   .numpad-container button:hover {
     opacity: 0.8;
+    border-color: #ffffff;
   }
 }
 
