@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, KeyboardEvent, FormEvent } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
 import { generateRandomSudoku, SUDOKUS } from './helper/map';
 import { returnSolvedBoard } from './helper/solver';
 import { copy2DArray, isEqual2DArrays, withinBoard } from './helper/util';
@@ -224,7 +223,7 @@ const Sudoku = () => {
     };
 
     return (
-        <RemoveScroll>
+        <>
             <div
                 className={`sudoku-container ${
                     !isRunning && !gameOver ? 'stopped-timer-bg' : ''
@@ -295,7 +294,7 @@ const Sudoku = () => {
                     </button>
                 </div>
             ) : null}
-        </RemoveScroll>
+        </>
     );
 };
 

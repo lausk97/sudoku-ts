@@ -455,6 +455,14 @@ body,
   }
 }
 
+@media (orientation: portrait) {
+  body,
+  html,
+  #root {
+    overflow: hidden;
+  }
+}
+
 /* use hover effect for desktop */
 @media (hover: hover) {
   .dropup:hover .dropup-content {
