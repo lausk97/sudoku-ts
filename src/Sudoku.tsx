@@ -1,4 +1,11 @@
-import { useState, useEffect, useRef, KeyboardEvent, FormEvent } from 'react';
+import {
+    useState,
+    useEffect,
+    useRef,
+    KeyboardEvent,
+    FormEvent,
+    FocusEvent
+} from 'react';
 import { generateRandomSudoku, SUDOKUS } from './helper/map';
 import { returnSolvedBoard } from './helper/solver';
 import { copy2DArray, isEqual2DArrays, withinBoard } from './helper/util';
@@ -210,7 +217,13 @@ const Sudoku = () => {
         }
     };
 
-    const handleTileFocus: Function = (rowIndex: number, colIndex: number) => {
+    const handleTileFocus: Function = (
+        e: FocusEvent<HTMLElement>,
+        rowIndex: number,
+        colIndex: number
+    ) => {
+        e.preventDefault();
+
         if (withinBoard(rowIndex, colIndex)) {
             document
                 .getElementById(`input-${rowIndex}-${colIndex}`)
