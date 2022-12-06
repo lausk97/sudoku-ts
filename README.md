@@ -43,4 +43,4 @@ npm test
 
 ## Deployment
 
-The project is currently deployed on Vercel, feel free to play the game through this [link]:(https://sudoku-ts.vercel.app/).
+The project is currently deployed on Vercel, feel free to play the game through this [link](https://sudoku-ts.vercel.app/).
