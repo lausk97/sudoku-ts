@@ -212,6 +212,10 @@ const Sudoku = () => {
 
     const handleTileFocus: Function = (rowIndex: number, colIndex: number) => {
         if (withinBoard(rowIndex, colIndex)) {
+            document
+                .getElementById(`input-${rowIndex}-${colIndex}`)
+                ?.focus({ preventScroll: true });
+
             setFocusRow(rowIndex);
             setFocusCol(colIndex);
         }
