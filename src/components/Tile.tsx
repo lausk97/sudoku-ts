@@ -74,6 +74,7 @@ const Tile = ({
                                 pattern="^$|[1-9]{1}"
                                 key={`input-${rowIndex}-${colIndex}`}
                                 id={`input-${rowIndex}-${colIndex}`}
+                                aria-label={`input-${rowIndex}-${colIndex}`}
                             />
                         ))}
                     </div>
