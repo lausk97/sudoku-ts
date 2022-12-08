@@ -19,7 +19,7 @@ export const copy2DArray = (
     return to;
 };
 
-export const isEqual = (a: Array<number>, b: Array<number>): boolean =>
+const isEqual = (a: Array<number>, b: Array<number>): boolean =>
     a.join() === b.join();
 
 export const isEqual2DArrays = (
@@ -51,6 +51,3 @@ export const withinBoard = (rowIndex: number, colIndex: number) => {
 
 export const preventBtnFocus: Function = (e: FormEvent<HTMLFormElement>) =>
     e.preventDefault();
-
-export const cancelablePreventDef: Function = (e: FormEvent<HTMLFormElement>) =>
-    e.cancelable && e.preventDefault();

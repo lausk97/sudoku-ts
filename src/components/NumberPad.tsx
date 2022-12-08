@@ -1,4 +1,4 @@
-import { preventBtnFocus, cancelablePreventDef } from '../helper/util';
+import { preventBtnFocus } from '../helper/util';
 
 const NumberPad = ({
     isGameOver,
