@@ -155,7 +155,7 @@ const Sudoku = () => {
     };
 
     const inputKeyboardNumber: Function = (e: KeyboardEvent<HTMLElement>) => {
-        if (!(parseInt(e.key) >= 1 && parseInt(e.key) <= 9)) {
+        if (gameOver || !(parseInt(e.key) >= 1 && parseInt(e.key) <= 9)) {
             e.preventDefault();
             return;
         }
