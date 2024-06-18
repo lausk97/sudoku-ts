@@ -4,9 +4,9 @@ const constants = Object.freeze({
     NUM_GUESSES: 9,
     BLOCK_SIZE: 3,
     EASY_DIFFICULTY: 0.8,
-    MEDIUM_DIFFICULTY: 0.6,
-    HARD_DIFFICULTY: 0.4,
-    EXPERT_DIFFICULTY: 0.2
+    MEDIUM_DIFFICULTY: 0.675,
+    HARD_DIFFICULTY: 0.45,
+    EXPERT_DIFFICULTY: 0.325
 });
 
 const {
