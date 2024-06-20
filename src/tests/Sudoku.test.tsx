@@ -54,16 +54,8 @@ describe('Sudoku - Resume', () => {
 
         const pause = 'Pause';
         const resumeInPauseContainer = 'Resume';
-        const resumeInMainContainer = container.querySelector('.rx-pointer');
 
-        expect(screen.queryByText(pause)).not.toBeInTheDocument();
-        expect(
-            screen.queryByText(resumeInPauseContainer)
-        ).not.toBeInTheDocument();
-        expect(resumeInMainContainer).not.toBeNull();
-
-        // click resume in main container will open up the pause container
-        fireEvent.click(resumeInMainContainer as Element);
+        // initially assuming the local storage board is there
         expect(screen.queryByText(pause)).toBeInTheDocument();
         expect(screen.queryByText(resumeInPauseContainer)).toBeInTheDocument();
 
@@ -74,6 +66,13 @@ describe('Sudoku - Resume', () => {
         expect(
             screen.queryByText(resumeInPauseContainer)
         ).not.toBeInTheDocument();
+
+        const resumeInMainContainer = container.querySelector('.rx-pointer');
+        expect(resumeInMainContainer).not.toBeNull();
+        // click resume in main container will open up the pause container
+        fireEvent.click(resumeInMainContainer as Element);
+        expect(screen.queryByText(pause)).toBeInTheDocument();
+        expect(screen.queryByText(resumeInPauseContainer)).toBeInTheDocument();
 
         cleanup();
     });

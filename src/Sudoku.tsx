@@ -29,6 +29,7 @@ const Sudoku = () => {
     const [gameOver, setGameOver] = useState<boolean>(false);
 
     const currBoardRef = useRef(board);
+    const initialized = useRef(false);
 
     // create a timer interval
     useInterval(
@@ -49,21 +50,25 @@ const Sudoku = () => {
     };
 
     useEffect(() => {
-        setIsRunning(false);
-        const localStoredBoard = localStorage.getItem('board');
-        const initialBoard = localStoredBoard
-            ? JSON.parse(localStoredBoard)
-            : generateRandomSudoku(difficulty);
-        setInitialBoard(initialBoard);
-        let copiedBoard = copy2DArray(initialBoard);
-        if (localStoredBoard) {
-            persistUserInputHistory(copiedBoard);
-            const timerStr = localStorage.getItem('timer');
-            if (timerStr) setCount(JSON.parse(timerStr));
+        if (!initialized.current) {
+            initialized.current = true;
+            const localStoredBoard = localStorage.getItem('board');
+            const initialBoard = localStoredBoard
+                ? JSON.parse(localStoredBoard)
+                : generateRandomSudoku(difficulty);
+
+            setInitialBoard(initialBoard);
+            let copiedBoard = copy2DArray(initialBoard);
+            if (localStoredBoard) {
+                persistUserInputHistory(copiedBoard);
+                const timerStr = localStorage.getItem('timer');
+                if (timerStr) setCount(JSON.parse(timerStr));
+                setIsRunning(false);
+            }
+            setBoard(copiedBoard);
+            setSolvedBoard(returnSolvedBoard(copy2DArray(initialBoard)));
+            localStorage.setItem('board', JSON.stringify(initialBoard));
         }
-        setBoard(copiedBoard);
-        setSolvedBoard(returnSolvedBoard(copy2DArray(initialBoard)));
-        localStorage.setItem('board', JSON.stringify(initialBoard));
     }, []);
 
     useEffect(() => {
