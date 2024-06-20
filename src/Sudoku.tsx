@@ -17,15 +17,13 @@ const Sudoku = () => {
     const [count, setCount] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(true);
     const [difficulty, setDifficulty] = useState<DifficultyType>('Easy');
-    const [initialBoard, setInitialBoard] = useState<SudokuBoard>(
-        generateRandomSudoku(difficulty)
-    );
-    const [board, setBoard] = useState<SudokuBoard | unsolvableBoard>(
-        copy2DArray(initialBoard)
+    const [initialBoard, setInitialBoard] = useState<SudokuBoard | null>(null);
+    const [board, setBoard] = useState<SudokuBoard | unsolvableBoard | null>(
+        null
     );
     const [solvedBoard, setSolvedBoard] = useState<
-        SudokuBoard | unsolvableBoard
-    >(returnSolvedBoard(copy2DArray(initialBoard)));
+        SudokuBoard | unsolvableBoard | null
+    >(null);
     const [focusRow, setFocusRow] = useState<number | undefined>();
     const [focusCol, setFocusCol] = useState<number | undefined>();
     const [gameOver, setGameOver] = useState<boolean>(false);
@@ -38,12 +36,41 @@ const Sudoku = () => {
         isRunning
     );
 
+    const persistUserInputHistory = (board: SudokuBoard | unsolvableBoard) => {
+        const userInput = localStorage.getItem('userInput');
+        if (board && userInput) {
+            for (const [position, value] of Object.entries(
+                JSON.parse(userInput)
+            )) {
+                const [rowIndex, colIndex] = position.split(':').map(Number);
+                board[rowIndex][colIndex] = Number(value);
+            }
+        }
+    };
+
+    useEffect(() => {
+        setIsRunning(false);
+        const localStoredBoard = localStorage.getItem('board');
+        const initialBoard = localStoredBoard
+            ? JSON.parse(localStoredBoard)
+            : generateRandomSudoku(difficulty);
+        setInitialBoard(initialBoard);
+        let copiedBoard = copy2DArray(initialBoard);
+        if (localStoredBoard) {
+            persistUserInputHistory(copiedBoard);
+            const timerStr = localStorage.getItem('timer');
+            if (timerStr) setCount(JSON.parse(timerStr));
+        }
+        setBoard(copiedBoard);
+        setSolvedBoard(returnSolvedBoard(copy2DArray(initialBoard)));
+        localStorage.setItem('board', JSON.stringify(initialBoard));
+    }, []);
+
     useEffect(() => {
         // handle unsolvable sudoku
-        if (!board || !solvedBoard) {
-            console.log('rendered wrong sudoku');
+        if (initialBoard !== null && !solvedBoard) {
+            console.log('rendered unsolvable sudoku');
             const pregeneratedSudokus = [SUDOKUS.Difficult, SUDOKUS.Easy];
-
             createNewSudoku(
                 pregeneratedSudokus[
                     Math.floor(Math.random() * pregeneratedSudokus.length)
@@ -69,12 +96,28 @@ const Sudoku = () => {
             board[rowIndex][colIndex] = value;
 
             setBoard(board);
+            let currentUserInput = {};
+            const storedUserInput = localStorage.getItem('userInput');
+            if (storedUserInput) {
+                currentUserInput = JSON.parse(storedUserInput);
+            }
+
+            localStorage.setItem(
+                'userInput',
+                JSON.stringify({
+                    ...currentUserInput,
+                    [`${rowIndex}:${colIndex}`]: value
+                })
+            );
         }
     };
 
     const formatTimer = () => {
         let minutes = Math.floor(count / 60);
         let seconds = count - minutes * 60;
+        if (Boolean(initialBoard)) {
+            localStorage.setItem('timer', JSON.stringify(count));
+        }
 
         return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
             2,
@@ -90,6 +133,7 @@ const Sudoku = () => {
         const newBoard = generateRandomSudoku(difficulty);
         setInitialBoard(newBoard);
         setBoard(copy2DArray(newBoard));
+        localStorage.setItem('board', JSON.stringify(newBoard));
         setSolvedBoard(returnSolvedBoard(copy2DArray(newBoard)));
         setDifficulty(difficulty);
 
@@ -100,6 +144,7 @@ const Sudoku = () => {
         const solvedSudoku =
             initialBoard && returnSolvedBoard(copy2DArray(initialBoard));
         setBoard(solvedSudoku);
+        localStorage.setItem('board', JSON.stringify(solvedBoard));
         setTimeout(() => {
             const isGameOver = !!(
                 currBoardRef.current &&
@@ -127,7 +172,7 @@ const Sudoku = () => {
             withinBoard(focusRow, focusCol) &&
             board
         ) {
-            if (initialBoard[focusRow][focusCol]) return;
+            if (initialBoard?.[focusRow][focusCol]) return;
             const currentBoard = copy2DArray(board);
             setCurrentBoard(currentBoard, focusRow, focusCol, UNASSIGNED);
         }
@@ -165,7 +210,7 @@ const Sudoku = () => {
             focusCol === undefined ||
             (focusRow !== undefined &&
                 focusCol !== undefined &&
-                initialBoard[focusRow][focusCol] !== UNASSIGNED)
+                initialBoard?.[focusRow][focusCol] !== UNASSIGNED)
         ) {
             return;
         }

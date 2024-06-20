@@ -15,6 +15,9 @@ const Action = ({
 }) => {
     const [showDifficulty, setShowDifficulty] = useState<boolean>(false);
     const createNewSudoku = (difficulty: DifficultyType) => {
+        localStorage.removeItem('timer');
+        localStorage.removeItem('userInput');
+        localStorage.removeItem('board');
         onCreateNewSudoku(difficulty);
         setShowDifficulty(false);
     };
