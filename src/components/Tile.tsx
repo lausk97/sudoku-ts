@@ -12,8 +12,8 @@ const Tile = ({
     onHandleFocusOut
 }: {
     initialBoard: SudokuBoard;
-    board: SudokuBoard | unsolvableBoard;
-    solvedBoard: SudokuBoard | unsolvableBoard;
+    board: SudokuBoard | unsolvableBoard | null;
+    solvedBoard: SudokuBoard | unsolvableBoard | null;
     focusRow: number | undefined;
     focusCol: number | undefined;
     onInputKeyboardNumber: Function;

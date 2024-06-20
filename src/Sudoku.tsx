@@ -241,7 +241,7 @@ const Sudoku = () => {
             focusCol === undefined ||
             (focusRow !== undefined &&
                 focusCol !== undefined &&
-                initialBoard[focusRow][focusCol] !== UNASSIGNED)
+                initialBoard?.[focusRow][focusCol] !== UNASSIGNED)
         )
             return;
 
