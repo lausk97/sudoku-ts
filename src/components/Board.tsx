@@ -18,7 +18,7 @@ const Board = ({
     onHandleTileFocus,
     onHandleFocusOut
 }: {
-    initialBoard: SudokuBoard;
+    initialBoard: SudokuBoard | null;
     board: SudokuBoard | unsolvableBoard | null;
     solvedBoard: SudokuBoard | unsolvableBoard | null;
     focusRow: number | undefined;

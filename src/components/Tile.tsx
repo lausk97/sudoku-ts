@@ -11,7 +11,7 @@ const Tile = ({
     onHandleTileFocus,
     onHandleFocusOut
 }: {
-    initialBoard: SudokuBoard;
+    initialBoard: SudokuBoard | null;
     board: SudokuBoard | unsolvableBoard | null;
     solvedBoard: SudokuBoard | unsolvableBoard | null;
     focusRow: number | undefined;
@@ -34,7 +34,7 @@ const Tile = ({
                             <input
                                 inputMode="none"
                                 className={`tile ${
-                                    initialBoard[rowIndex][colIndex] !==
+                                    initialBoard?.[rowIndex][colIndex] !==
                                     UNASSIGNED
                                         ? 'init'
                                         : col === UNASSIGNED
@@ -57,7 +57,7 @@ const Tile = ({
                                         : ''
                                 }`}
                                 readOnly={
-                                    initialBoard[rowIndex][colIndex] !==
+                                    initialBoard?.[rowIndex][colIndex] !==
                                     UNASSIGNED
                                 }
                                 type="text"
